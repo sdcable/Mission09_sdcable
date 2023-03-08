@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.33130.400
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mission09_sdcable", "Mission09_sdcable\Mission09_sdcable.csproj", "{DB7EF7E1-A524-4510-8E3E-C415104CE1DE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mission09_sdcable", "Mission09_sdcable\Mission09_sdcable.csproj", "{DB7EF7E1-A524-4510-8E3E-C415104CE1DE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

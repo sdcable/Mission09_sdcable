@@ -1,0 +1,35 @@
+﻿@{
+}
+
+@model Book
+
+<div class="card card-outline-primary m-1 p-1">
+    <div class="bg-light p-1">
+        <h4>@Model.Title</h4>
+
+        <span class="badge bg-info" style="float:right">
+            ProjectImpact: @Model.Author served
+        </span>
+    </div>
+
+    <ul>
+        <li>Book Category: @Model.Category</li>
+        <li>Author: @Model.Author</li>
+        <li>Publisher: @Model.Publisher</li>
+        <li>ISBN: @Model.Isbn</li>
+        <li>Classification: @Model.Classification</li>
+        <li>Category: @Model.Category </li>
+        <li>PageCount: @Model.PageCount </li>
+        <li>Price: @Model.Price </li>
+    </ul>
+
+    <form method="post" asp-page="/Donate">
+        <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+        <input type="hidden" asp-for="@Model.BookId" />
+
+        <span class="card-text">
+            <button type="submit" class="btn btn-success btn-sm float-end">Add to Cart</button>
+        </span>
+    </form>
+</div>
+

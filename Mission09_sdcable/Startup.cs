@@ -42,6 +42,9 @@ namespace Mission09_sdcable
             });
 
             services.AddScoped<iBookStoreRepository, EFBookStoreRepository>();
+            services.AddRazorPages();
+            services.AddDistributedMemoryCache();
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -62,6 +65,7 @@ namespace Mission09_sdcable
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseSession();
 
             app.UseAuthentication();
             app.UseAuthorization();
@@ -69,8 +73,33 @@ namespace Mission09_sdcable
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
+                    "typepage",
+                    "Category_{categoryType}/Page{pageNum}",
+                    new { Controller = "Home", action = "Index" 
+                    });
+
+                endpoints.MapControllerRoute(
+                    "Paging",
+                    "Page{pageNum}",
+                    new
+                    {
+                        Controller = "Home",
+                        action = "Index",
+                        pageNum = 1
+                    });
+
+                endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "Category_{categoryType}",
+                    new
+                    {
+                        Controller = "Home",
+                        action = "Index",
+                        pageNum = 1
+                    });
+
+
+                endpoints.MapDefaultControllerRoute();
                 endpoints.MapRazorPages();
             });
         }

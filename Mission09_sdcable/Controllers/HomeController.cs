@@ -19,20 +19,24 @@ namespace Mission09_sdcable.Controllers
             repo = temp;
         }
 
-        public IActionResult Index(int pageNum = 1)
+        public IActionResult Index(string categoryType, int pageNum = 1)
         {
-            int pageSize = 10; //Set page size to be 10 books long.
+            int pageSize = 4; //Set page size to be 10 books long.
 
             var x = new BookViewModel //Creating a new big model that includes the Book model and PageInfo model.
             {
                 Books = repo.Books //Creating Books
+                .Where(p => p.Category == categoryType || categoryType == null)
                 .OrderBy(p => p.Title)
                 .Skip((pageNum - 1) * pageSize)
                 .Take(pageSize),
 
                 PageInfo = new PageInfo //Creating the PageInfo Model that will be passed to the view, which will then be passed to the TagHelper
                 {
-                    TotalNumBooks = repo.Books.Count(),
+                    TotalNumBooks =
+                    (
+                        categoryType == null ? repo.Books.Count() : repo.Books.Where(x => x.Category == categoryType).Count()
+                    ),
                     BooksPerPage = pageSize,
                     CurrentPage = pageNum
                 }
