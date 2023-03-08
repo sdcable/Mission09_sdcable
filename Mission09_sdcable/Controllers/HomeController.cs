@@ -21,7 +21,7 @@ namespace Mission09_sdcable.Controllers
 
         public IActionResult Index(string categoryType, int pageNum = 1)
         {
-            int pageSize = 4; //Set page size to be 10 books long.
+            int pageSize = 10; //Set page size to be 10 books long.
 
             var x = new BookViewModel //Creating a new big model that includes the Book model and PageInfo model.
             {
@@ -49,6 +49,5 @@ namespace Mission09_sdcable.Controllers
         {
             return View();
         }
-
     }
 }

@@ -8,7 +8,7 @@
         <h4>@Model.Title</h4>
 
         <span class="badge bg-info" style="float:right">
-            ProjectImpact: @Model.Author served
+            Cost: $@Model.Price
         </span>
     </div>
 
@@ -20,7 +20,6 @@
         <li>Classification: @Model.Classification</li>
         <li>Category: @Model.Category </li>
         <li>PageCount: @Model.PageCount </li>
-        <li>Price: @Model.Price </li>
     </ul>
 
     <form method="post" asp-page="/Donate">
@@ -28,7 +27,9 @@
         <input type="hidden" asp-for="@Model.BookId" />
 
         <span class="card-text">
-            <button type="submit" class="btn btn-success btn-sm float-end">Add to Cart</button>
+            <button type="submit" class="btn btn-success btn-sm float-end" data-toggle="tooltip" title="Please Purchase Me!">
+              Add to Cart
+            </button>
         </span>
     </form>
 </div>
