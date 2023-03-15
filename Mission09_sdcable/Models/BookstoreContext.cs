@@ -20,5 +20,6 @@ namespace Mission09_sdcable.Models
         }
 
         public DbSet<Book> Books { get; set; }
+        public DbSet<Donation> Donation { get; set; }
     }
 }

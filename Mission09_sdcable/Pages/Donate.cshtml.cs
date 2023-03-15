@@ -12,30 +12,31 @@ namespace Mission09_sdcable.Pages
     public class DonateModel : PageModel
     {
         private iBookStoreRepository repo { get; set; }
-
-        public DonateModel(iBookStoreRepository temp)
-        {
-            repo = temp;
-        }
-
         public Basket basket { get; set; }
         public string ReturnURL { get; set; }
+        public DonateModel(iBookStoreRepository temp, Basket b)
+        {
+            repo = temp;
+            basket = b;
+        }
         public void OnGet(string returnURL)
         {
             ReturnURL = returnURL ?? "/";
-            basket = HttpContext.Session.GetJson<Basket>("basket") ?? new Basket();
         }
 
         public IActionResult OnPost(int BookId, string returnUrl)
         {
             Book p = repo.Books.FirstOrDefault(x => x.BookId == BookId);
 
-            basket = HttpContext.Session.GetJson<Basket>("basket") ?? new Basket();
             basket.AddItem(p, 1);
 
-            HttpContext.Session.SetJson("basket", basket);
-
             return RedirectToPage(new { ReturnURL = returnUrl});
+        }
+
+        public IActionResult OnPostRemove(int bookId, string returnURL)
+        {
+            basket.RemoveItem(basket.Items.First(x => x.Book.BookId == bookId).Book);
+            return RedirectToPage(new { ReturnURL = returnURL });
         }
     }
 }
